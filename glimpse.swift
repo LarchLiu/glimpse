@@ -107,6 +107,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private func setupWebView() {
         let controller = WKUserContentController()
         let bridgeJS = """
+        (function() {
+            var s = document.createElement('style');
+            s.textContent = 'video::-webkit-media-controls { display: none !important; }';
+            (document.head || document.documentElement).appendChild(s);
+        })();
         window.glimpse = {
             send: function(data) {
                 window.webkit.messageHandlers.glimpse.postMessage(JSON.stringify(data));
