@@ -1,0 +1,20 @@
+{
+  "name": "@cloudgeek/glimpse",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "glimpse.mjs",
+  "exports": {
+    ".": "./glimpse.mjs"
+  },
+  "files": [
+    "glimpse.mjs",
+    "glimpse.swift",
+    "Info.plist"
+  ],
+  "scripts": {
+    "build": "mkdir -p /tmp/glimpse-swift-cache && swiftc -module-cache-path /tmp/glimpse-swift-cache -O glimpse.swift -o glimpse -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker Info.plist",
+    "postinstall": "npm run build"
+  },
+  "os": ["darwin"],
+  "cpu": ["arm64", "x64"]
+}
